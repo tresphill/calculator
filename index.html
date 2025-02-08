@@ -35,12 +35,9 @@
 
       /* styling for the calculator container */
       .calculator {
-        display: grid;
-        grid-template-columns: repeat(4, 100px); 
-        gap: 20px; 
-        padding: 20px;
         position: relative;
-        margin-left: 15px;
+        width: 100%;
+        height: 100%;
       }
 
       /* fake screen styling */
@@ -133,47 +130,56 @@
     <button id="reset-button">Reset</button>
 
     <script>
+      const body = document.getElementsByTagName("body");
       const buttons = document.querySelectorAll(".button");
-      const maxDistance = 50;
-      const speed = 100; // unsure what unit of measurement this is
-
-      // function to calculate the distance between two points
-      function distance(x1, y1, x2, y2) {
-        return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
-      }
+      const maxDistance = 50; // px
+      const speed = 100; // px
 
       // function to make a button repel away from the mouse cursor
       function repelButton(button, mouseX, mouseY) {
         const rect = button.getBoundingClientRect();
+        const calculator = button.parentElement.getBoundingClientRect();
+        const buttonWidth = rect.width;
+        const buttonHeight = rect.height;
         const buttonX = rect.left + rect.width / 2;
         const buttonY = rect.top + rect.height / 2;
-        const dist = distance(buttonX, buttonY, mouseX, mouseY);
 
-        if (dist < maxDistance) {
-          const angle = Math.atan2(buttonY - mouseY, buttonX - mouseX);
-          const offsetX = Math.cos(angle) * speed;
-          const offsetY = Math.sin(angle) * speed;
+        const angle = Math.atan2(buttonY - mouseY, buttonX - mouseX);
+        const offsetX = Math.cos(angle) * speed;
+        const offsetY = Math.sin(angle) * speed;
 
-          // calculate new position of button
-          const newX = rect.left + offsetX;
-          const newY = rect.top + offsetY;
+        // calculate new position of button
+        let newX = rect.left + offsetX;
+        const leftLimit = 0;
+        const rightLimit = calculator.right - buttonWidth;
+        const bottomLimit = calculator.bottom - buttonHeight;
+        const topLimit = 0;
 
-          // update button's position relative to its parent
-          button.style.left = `${
-            newX - button.parentElement.getBoundingClientRect().left
-          }px`;
-          button.style.top = `${
-            newY - button.parentElement.getBoundingClientRect().top
-          }px`;
+        if (newX < leftLimit) {
+          newX = leftLimit;
+        } else if (newX > rightLimit) {
+          newX = rightLimit;
         }
+
+        let newY = rect.top + offsetY;
+        if (newY < topLimit) {
+          newY = topLimit;
+        } else if (newY > bottomLimit) {
+          newY = bottomLimit;
+        }
+
+        // update button's position relative to its parent
+        button.style.left = `${newX}px`;
+        button.style.top = `${newY}px`;
       }
 
       // event listener for mouse movement
-      document.addEventListener("mousemove", (event) => {
-        buttons.forEach((button) =>
-          repelButton(button, event.clientX, event.clientY)
-        );
-      });
+      buttons.forEach((button) =>
+        // button.addEventListener("mouseover", (e) =>
+        button.addEventListener("mouseenter", (e) =>
+          repelButton(e.target, event.clientX, event.clientY)
+        )
+      );
 
       // Reset button functionality
       document.getElementById("reset-button").addEventListener("click", () => {
