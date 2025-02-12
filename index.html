@@ -21,6 +21,37 @@
         background-size: 20px 20px; /* Size of each dot */
       }
 
+      /* Styling for the links */
+      /* Styling for the links */
+      .top-right-links {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        display: flex;
+        gap: 15px; /* Space between links */
+        z-index: 1000; /* Ensure the links are above other elements */
+      }
+
+      .top-right-links a {
+        text-decoration: none;
+        color: black;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        background: rgba(
+          255,
+          255,
+          255,
+          0.8
+        ); /* Optional: Adds a background for visibility */
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+
+      .top-right-links a:hover {
+        background: rgba(200, 200, 200, 0.8);
+      }
+
       h1 {
         font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
         font-size: 8rem;
@@ -43,13 +74,13 @@
       /* fake screen styling */
       .screen {
         position: absolute;
-        top: -100px;
-        left: 0;
-        width: 90%;
+        top: 386px;
+        left: 950px;
+        width: 450px;
         background-color: black;
         color: white;
         text-align: right;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
         font-size: 40px;
         padding: 20px;
         margin-bottom: 20px;
@@ -101,29 +132,37 @@
   </head>
 
   <body>
+    <!-- Links in the top right corner -->
+    <div class="top-right-links">
+      <a href="https://github.com/tresphill" target="_blank">Github</a>
+      <a href="https://www.linkedin.com/in/tres-phillips/" target="_blank"
+        >LinkedIn</a
+      >
+    </div>
+
     <h1>Just a Shy Calculator</h1>
     <div class="calculator">
       <div class="screen">0</div>
 
-      <div class="button" style="top: 500px; left: 1000px">1</div>
-      <div class="button" style="top: 500px; left: 1130px">2</div>
-      <div class="button" style="top: 500px; left: 1260px">3</div>
-      <div id="operand" class="button" style="top: 500px; left: 1390px">+</div>
+      <div class="button" style="top: 500px; left: 950px">1</div>
+      <div class="button" style="top: 500px; left: 1080px">2</div>
+      <div class="button" style="top: 500px; left: 1210px">3</div>
+      <div id="operand" class="button" style="top: 500px; left: 1340px">+</div>
 
-      <div class="button" style="top: 630px; left: 1000px">4</div>
-      <div class="button" style="top: 630px; left: 1130px">5</div>
-      <div class="button" style="top: 630px; left: 1260px">6</div>
-      <div id="operand" class="button" style="top: 630px; left: 1390px">-</div>
+      <div class="button" style="top: 630px; left: 950px">4</div>
+      <div class="button" style="top: 630px; left: 1080px">5</div>
+      <div class="button" style="top: 630px; left: 1210px">6</div>
+      <div id="operand" class="button" style="top: 630px; left: 1340px">-</div>
 
-      <div class="button" style="top: 760px; left: 1000px">7</div>
-      <div class="button" style="top: 760px; left: 1130px">8</div>
-      <div class="button" style="top: 760px; left: 1260px">9</div>
-      <div id="operand" class="button" style="top: 760px; left: 1390px">*</div>
+      <div class="button" style="top: 760px; left: 950px">7</div>
+      <div class="button" style="top: 760px; left: 1080px">8</div>
+      <div class="button" style="top: 760px; left: 1210px">9</div>
+      <div id="operand" class="button" style="top: 760px; left: 1340px">*</div>
 
-      <div id="operand" class="button" style="top: 890px; left: 1000px">C</div>
-      <div class="button" style="top: 890px; left: 1130px">0</div>
-      <div id="operand" class="button" style="top: 890px; left: 1260px">=</div>
-      <div id="operand" class="button" style="top: 890px; left: 1390px">/</div>
+      <div id="operand" class="button" style="top: 890px; left: 950px">C</div>
+      <div class="button" style="top: 890px; left: 1080px">0</div>
+      <div id="operand" class="button" style="top: 890px; left: 1210px">=</div>
+      <div id="operand" class="button" style="top: 890px; left: 1340px">/</div>
     </div>
 
     <!-- Reset Button -->
@@ -175,7 +214,6 @@
 
       // event listener for mouse movement
       buttons.forEach((button) =>
-        // button.addEventListener("mouseover", (e) =>
         button.addEventListener("mouseenter", (e) =>
           repelButton(e.target, event.clientX, event.clientY)
         )
