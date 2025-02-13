@@ -126,7 +126,6 @@
   </head>
 
   <body>
-    <!-- Links in the top right corner -->
     <div class="top-right-links">
       <a href="https://github.com/tresphill" target="_blank">Github</a>
       <a href="https://www.linkedin.com/in/tres-phillips/" target="_blank"
@@ -159,14 +158,13 @@
       <div id="operand" class="button" style="top: 890px; left: 1410px">/</div>
     </div>
 
-    <!-- Reset Button -->
     <button id="reset-button">Reset</button>
 
     <script>
       const body = document.getElementsByTagName("body");
       const buttons = document.querySelectorAll(".button");
-      const maxDistance = 50; // px
-      const speed = 100; // px
+      const maxDistance = 100; // px
+      const speed = 200; // px
 
       // function to make a button repel away from the mouse cursor
       function repelButton(button, mouseX, mouseY) {
